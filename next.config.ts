@@ -10,6 +10,7 @@ const withSerwist = withSerwistInit({
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["mongoose"],
+  turbopack: {},
 };
 
 export default withSerwist(nextConfig);
