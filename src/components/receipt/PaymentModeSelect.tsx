@@ -24,7 +24,7 @@ export default function PaymentModeSelect({ value, onChange }: PaymentModeSelect
 
   return (
     <div className="md:col-span-2 space-y-1.5 relative">
-      <label htmlFor="paymentMode" className="block text-xs font-bold text-secondary uppercase tracking-wider flex items-center gap-1.5">
+      <label htmlFor="paymentMode" className="block text-xs font-bold text-secondary uppercase tracking-wider items-center gap-1.5">
         <CreditCard className="w-3.5 h-3.5 text-primary" /> Payment Mode:
       </label>
 

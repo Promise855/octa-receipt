@@ -6,6 +6,7 @@ import Customer from "@/models/Customer";
 import Invoice, { IInvoiceItem, PaymentMode } from "@/models/Invoice";
 import { formatOctaInvoiceNumber, numberToNairaWords } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
+import { InvoiceRecord } from "@/type/invoice";
 
 export interface CreateInvoiceInput {
   customerName: string;
@@ -140,7 +141,9 @@ export async function createInvoiceAction(
 /**
  * Server Action: Retrieves a single invoice by MongoDB ID or Invoice Number.
  */
-export async function getInvoiceByIdAction(idOrNumber: string): Promise<ActionResponse> {
+export async function getInvoiceByIdAction(
+  idOrNumber: string
+): Promise<ActionResponse<InvoiceRecord>> {
   try {
     await dbConnect();
 
@@ -165,7 +168,9 @@ export async function getInvoiceByIdAction(idOrNumber: string): Promise<ActionRe
 /**
  * Server Action: Lists or searches recent receipts.
  */
-export async function getInvoicesAction(searchQuery?: string): Promise<ActionResponse> {
+export async function getInvoicesAction(
+  searchQuery?: string
+): Promise<ActionResponse<InvoiceRecord[]>> {
   try {
     await dbConnect();
 

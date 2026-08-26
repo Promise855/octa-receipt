@@ -19,27 +19,7 @@ import {
 } from "lucide-react";
 import { getInvoicesAction } from "@/app/actions/invoiceActions";
 import { formatCurrency } from "@/lib/utils";
-
-interface InvoiceItem {
-  _id?: string;
-  name: string;
-  description?: string;
-  details?: string;
-  qty: number;
-  unitPrice: number;
-  discount?: number;
-}
-
-interface InvoiceRecord {
-  _id: string;
-  customerName?: string;
-  phoneNumber?: string;
-  invoiceNumber?: string;
-  date?: string;
-  paymentMode?: string;
-  items?: InvoiceItem[];
-  createdAt?: string;
-}
+import { InvoiceRecord, InvoiceItem } from "@/type/invoice";
 
 export default function PastReceiptsPage() {
   const [invoices, setInvoices] = useState<InvoiceRecord[]>([]);
