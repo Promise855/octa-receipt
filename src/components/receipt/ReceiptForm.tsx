@@ -223,7 +223,7 @@ export default function ReceiptForm() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="space-y-1.5">
-              <label htmlFor="customerName" className="block text-xs font-bold text-secondary uppercase tracking-wider flex items-center gap-1.5">
+              <label htmlFor="customerName" className="block text-xs font-bold text-secondary uppercase tracking-wider items-center gap-1.5">
                 <User className="w-3.5 h-3.5 text-primary" /> Customer Name:
               </label>
               <input
@@ -238,7 +238,7 @@ export default function ReceiptForm() {
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="phoneNumber" className="block text-xs font-bold text-secondary uppercase tracking-wider flex items-center gap-1.5">
+              <label htmlFor="phoneNumber" className="block text-xs font-bold text-secondary uppercase tracking-wider items-center gap-1.5">
                 <Phone className="w-3.5 h-3.5 text-primary" /> Phone Number:
               </label>
               <input
@@ -253,7 +253,7 @@ export default function ReceiptForm() {
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="invoiceNumber" className="block text-xs font-bold text-secondary uppercase tracking-wider flex items-center gap-1.5">
+              <label htmlFor="invoiceNumber" className="block text-xs font-bold text-secondary uppercase tracking-wider items-center gap-1.5">
                 <Hash className="w-3.5 h-3.5 text-primary" /> INVOICE NO:
               </label>
               <div className="flex rounded-xl overflow-hidden border border-surface-border focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">

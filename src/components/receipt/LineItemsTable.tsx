@@ -4,6 +4,23 @@ import React from "react";
 import { Plus, Trash2, Edit3, SlidersHorizontal } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
+function renderDetails(details: string) {
+  return details.split("\n").map((line, i) => {
+    const idx = line.indexOf(":");
+    if (idx === -1) return (
+      <div key={i}>{line}</div>
+    );
+    const label = line.slice(0, idx + 1); // "Model:"
+    const value = line.slice(idx + 1);
+    return (
+      <div key={i}>
+        <strong>{label}</strong>
+        {value}
+      </div>
+    );
+  });
+}
+
 export interface ItemRow {
   id: string;
   name: string;
@@ -50,9 +67,9 @@ export default function LineItemsTable({
           <thead>
             <tr className="bg-secondary text-white font-semibold">
               <th className="py-3 px-3 w-10 text-center">S/N</th>
-              <th className="py-3 px-3 min-w-[130px]">Name</th>
-              <th className="py-3 px-3 min-w-[120px]">Item Description</th>
-              <th className="py-3 px-3 min-w-[180px]">Item Details</th>
+              <th className="py-3 px-3 min-w-32.5">Name</th>
+              <th className="py-3 px-3 min-w-30">Item Description</th>
+              <th className="py-3 px-3 min-w-45">Item Details</th>
               <th className="py-3 px-3 w-16 text-center">Qty</th>
               <th className="py-3 px-3 w-32 text-right">(₦) Unit Price</th>
               <th className="py-3 px-3 w-24 text-center">Discount (%)</th>
@@ -92,10 +109,10 @@ export default function LineItemsTable({
                       title={item.details}
                       className="w-full flex items-center justify-between gap-1.5 px-2.5 py-1.5 bg-primary/5 hover:bg-primary/10 border border-primary/20 text-secondary rounded-lg text-xs font-medium transition-colors text-left group cursor-pointer"
                     >
-                      <span className="whitespace-pre-line line-clamp-2 max-w-[150px] font-mono text-[11px] text-zinc-800">
-                        {item.details}
+                      <span className="whitespace-pre-line line-clamp-2 max-w-37.5 font-mono text-[11px] text-zinc-800">
+                        {renderDetails(item.details)}
                       </span>
-                      <Edit3 className="w-3.5 h-3.5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
+                      <Edit3 className="w-3.5 h-3.5 text-primary shrink-0 group-hover:scale-110 transition-transform" />
                     </button>
                   ) : (
                     <button

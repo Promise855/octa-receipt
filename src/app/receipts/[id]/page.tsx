@@ -48,7 +48,7 @@ export default async function ReceiptPage({ params }: PageProps) {
   return (
     <main className="min-h-screen bg-gray-100 py-8 px-4 print:p-0 print:bg-white">
       {/* Top Action Bar (Hidden on Print) */}
-      <div className="max-w-4xl mx-auto mb-6 flex justify-between items-center no-print">
+      <div className="max-w-7xl mx-auto mb-6 flex justify-between items-center no-print">
         <Link
           href="/"
           className="text-xs font-bold text-secondary hover:text-primary transition-colors flex items-center gap-1"
@@ -59,7 +59,7 @@ export default async function ReceiptPage({ params }: PageProps) {
       </div>
 
       {/* Printable Receipt Container matching receipt.html */}
-      <div className="container bg-white text-secondary p-8 rounded-lg border border-surface-border shadow-lg font-sans max-w-4xl mx-auto space-y-6 print:shadow-none print:border-none print:p-0">
+      <div className="container bg-white text-secondary p-8 rounded-lg border border-surface-border shadow-lg font-sans max-w-7xl mx-auto space-y-6 print:shadow-none print:border-none print:p-0">
         <header className="header flex flex-col justify-center items-center pb-4 gap-4">
           <Image
             src="/img/Octa-logo.png"
@@ -107,13 +107,13 @@ export default async function ReceiptPage({ params }: PageProps) {
               <thead>
                 <tr className="bg-secondary text-white print:bg-gray-200 print:text-black">
                   <th className="p-2 border border-surface-border text-center w-8">S/N</th>
-                  <th className="p-2 border border-surface-border">Name</th>
-                  <th className="p-2 border border-surface-border">Item Description</th>
-                  <th className="p-2 border border-surface-border">Item Details</th>
+                  <th className="p-2 border border-surface-border text-center">Name</th>
+                  <th className="p-2 border border-surface-border text-center">Item Description</th>
+                  <th className="p-2 border border-surface-border text-center">Item Details</th>
                   <th className="p-2 border border-surface-border text-center w-12">Qty</th>
-                  <th className="p-2 border border-surface-border text-right">(₦) Unit Price</th>
-                  <th className="p-2 border border-surface-border text-center w-16">Discount (%)</th>
-                  <th className="p-2 border border-surface-border text-right">Amount</th>
+                  <th className="p-2 border border-surface-border text-center">(₦) Unit Price</th>
+                  <th className="p-2 border border-surface-border text-center w-12">Discount (%)</th>
+                  <th className="p-2 border border-surface-border text-center">Amount</th>
                 </tr>
               </thead>
               <tbody id="itemRows">
@@ -121,8 +121,8 @@ export default async function ReceiptPage({ params }: PageProps) {
                   <tr key={index} className="even:bg-surface-light print:even:bg-transparent">
                     <td className="p-2 border border-surface-border text-center font-bold">{index + 1}</td>
                     <td className="p-2 border border-surface-border font-medium">{item.name}</td>
-                    <td className="p-2 border border-surface-border">{item.description || "—"}</td>
-                    <td className="p-2 border border-surface-border whitespace-pre-line">{item.details || "—"}</td>
+                    <td className="p-2 border border-surface-border ">{item.description || "—"}</td>
+                    <td className="p-2 border border-surface-border text-center whitespace-pre-line">{item.details || "—"}</td>
                     <td className="p-2 border border-surface-border text-center">{item.qty}</td>
                     <td className="p-2 border border-surface-border text-right">{formatCurrency(item.unitPrice)}</td>
                     <td className="p-2 border border-surface-border text-center">{item.discount}%</td>
