@@ -6,29 +6,7 @@ import { notFound } from "next/navigation";
 import { getInvoiceByIdAction } from "@/app/actions/invoiceActions";
 import { formatCurrency } from "@/lib/utils";
 import PrintButton from "../../../components/PrintButton";
-
-interface InvoiceItem {
-  name: string;
-  description?: string;
-  details?: string;
-  qty: number;
-  unitPrice: number;
-  discount: number;
-  amount: number;
-}
-
-interface Invoice {
-  invoiceNumber: string;
-  customerName: string;
-  phoneNumber: string;
-  date: string;
-  items: InvoiceItem[];
-  itemQty: number;
-  subTotal: number;
-  paymentMode: string;
-  total: number;
-  amountInWords: string;
-}
+import { InvoiceRecord } from "@/type/invoice";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -42,8 +20,8 @@ export default async function ReceiptPage({ params }: PageProps) {
     notFound();
   }
 
-  const invoice = response.data as Invoice;
-  const formattedDate = new Date(invoice.date).toISOString().split("T")[0];
+  const invoice = response.data as InvoiceRecord;
+  const formattedDate = new Date(invoice.date ?? "").toISOString().split("T")[0];
 
   return (
     <main className="min-h-screen bg-gray-100 py-8 px-4 print:p-0 print:bg-white">
@@ -117,7 +95,7 @@ export default async function ReceiptPage({ params }: PageProps) {
                 </tr>
               </thead>
               <tbody id="itemRows">
-                {invoice.items.map((item: { name: string; description?: string; details?: string; qty: number; unitPrice: number; discount: number; amount: number }, index: number) => (
+                {(invoice.items ?? []).map((item, index) => (
                   <tr key={index} className="even:bg-surface-light print:even:bg-transparent">
                     <td className="p-2 border border-surface-border text-center font-bold">{index + 1}</td>
                     <td className="p-2 border border-surface-border font-medium">{item.name}</td>
@@ -127,7 +105,7 @@ export default async function ReceiptPage({ params }: PageProps) {
                     <td className="p-2 border border-surface-border text-right">{formatCurrency(item.unitPrice)}</td>
                     <td className="p-2 border border-surface-border text-center">{item.discount}%</td>
                     <td className="p-2 border border-surface-border text-right font-bold text-primary print:text-black">
-                      ₦{formatCurrency(item.amount)}
+                      ₦{formatCurrency(item.amount ?? 0)}
                     </td>
                   </tr>
                 ))}
@@ -139,12 +117,12 @@ export default async function ReceiptPage({ params }: PageProps) {
         <div className="totals-section bg-surface-light p-4 rounded-md border border-surface-border text-sm print:bg-transparent print:border-none print:p-0 space-y-2 ml-auto w-full md:w-1/2">
             <div className="totals-details grid grid-cols-1 gap-2">
                 <p className="text-right">Item-Qty: <span id="itemQty" aria-label="Total Item Quantity" className="font-semibold">{invoice.itemQty}</span></p>
-                <p className="text-right">Sub Total: ₦<span id="subTotal" aria-label="Sub Total" className="font-semibold">{formatCurrency(invoice.subTotal)}</span></p>
+                <p className="text-right">Sub Total: ₦<span id="subTotal" aria-label="Sub Total" className="font-semibold">{formatCurrency(invoice.subTotal ?? 0)}</span></p>
             </div>
             <div className="grid grid-cols-1 gap-2 border-t border-surface-border pt-2">
                 <p className="text-right">Payment Mode: <span id="paymentMode" aria-label="Payment Mode" className="font-semibold text-primary print:text-black">{invoice.paymentMode}</span></p>
                 <p className="text-right text-base font-bold text-primary print:text-black">
-                Total: ₦<span id="total" aria-label="Total Amount">{formatCurrency(invoice.total)}</span>
+                Total: ₦<span id="total" aria-label="Total Amount">{formatCurrency(invoice.total ?? 0)}</span>
                 </p>
             </div>
             <p className="border-t border-surface-border pt-2 text-sm text-right">
