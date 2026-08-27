@@ -8,17 +8,17 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Official Receipt & Invoice Management Application for Octavian Dynamics Enterprises Ltd",
     start_url: "/",
     display: "standalone",
-    background_color: "#09090B", // Brand Black
-    theme_color: "#DC2626",      // Brand Red
+    background_color: "#ffffff",
+    theme_color: "#09090B",      // Brand Black
     icons: [
       {
-        src: "/img/Octa-logo.png",
+        src: "/img/octalogo.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/img/Octa-logo.png",
+        src: "/img/octalogo.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
